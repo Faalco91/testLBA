@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const phonesSchema = new mongoose.Schema({
+    _id: Number,
     name: String,
     type: String,
     price: Number,
