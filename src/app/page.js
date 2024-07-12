@@ -1,7 +1,21 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 
-export default function Home() {
+async function getData() {
+  const res = await fetch('http://localhost:3000/api/phones');
+ 
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  return res.json()
+}
+ 
+
+export default async function Home() {
+
+  const data = await getData();
+  console.log(data[1].name);
+  
   return (
     <main className={styles.main}>
       <div className={styles.description}>
