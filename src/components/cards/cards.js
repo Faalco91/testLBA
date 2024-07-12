@@ -10,23 +10,37 @@ export default function Cards() {
     const [data, setData] = useState([]);
   
     useEffect(() => {
-      const data = async () => {
+      const fetchData = async () => { 
         try {
           const result = await getData();
           setData(result);
-          console.log(setData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
       };
-      data();
+      fetchData();
     }, []);
   
+    const handlePhoneUpdate = (id, updatedPhone) => {
+      setData((prevData) =>
+        prevData.map((phone) => (phone._id === id ? { ...phone, ...updatedPhone } : phone))
+      );
+    };
+
+    const handlePhoneDelete = (id) => {
+      setData((prevData) => prevData.filter((phone) => phone._id !== id));
+    };
+
     return (
       <div className={styles.cardsContainer}>
         {data.map((phone) => (
-          <CardComponent key={phone._id} phone={phone} />
+          <CardComponent
+            key={phone._id}
+            phone={phone}
+            onPhoneUpdate={handlePhoneUpdate}
+            onPhoneDelete={handlePhoneDelete}
+          />
         ))}
       </div>
     );
-  }
+}

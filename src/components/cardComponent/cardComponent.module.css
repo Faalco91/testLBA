@@ -27,4 +27,15 @@
     position: absolute;
     top: 0rem;
     right: 0rem;
+    display: flex;
+    justify-content: flex-end;
+ }
+ .deleteIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+ }
+
+ .button {
+    min-width: 0 !important;
  }
