@@ -8,13 +8,18 @@ import '@fontsource/roboto/700.css';
 <meta name="viewport" content="initial-scale=1, width=device-width" />
 
 import Cards from '../components/cards/cards';
+import Banner from "../components/banner/banner";
 
  
 export default function Home() {
 
   return (
-    <main className={styles.main}>
-      <Cards />
-    </main>
+    <>
+      <Banner />
+      <main className={styles.main}>
+        <Cards />
+      </main>
+    </>
+
   );
 }

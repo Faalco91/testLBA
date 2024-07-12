@@ -1,0 +1,14 @@
+.navbar {
+    position: fixed;
+    width: 100%;
+    background-color: rgb(35, 35, 35);
+}
+
+.logo {
+    transform: rotate(180deg);
+}
+.shoppingLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
