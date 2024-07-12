@@ -1,27 +1,32 @@
+'use client'
 
-async function getData() {
-    const res = await fetch('http://localhost:3000/api/phones');
-   
-    if (!res.ok) {
-      throw new Error('Failed to fetch data')
-    }
-    return res.json()
-  }
+import { useState, useEffect } from 'react';
+import { getData } from '../../api';
+import CardComponent from '../cardComponent/cardComponent';
 
-export default async function Cards() {
-    const data = await getData();
-    console.log(data[0].name);
+import styles from './cards.module.css'
 
+export default function Cards() {
+    const [data, setData] = useState([]);
+  
+    useEffect(() => {
+      const data = async () => {
+        try {
+          const result = await getData();
+          setData(result);
+          console.log(setData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+      data();
+    }, []);
+  
     return (
-        <div>
-            <ul>
-                {data.map((phones) => (
-                  <li key={phones._id}>
-                    {phones.name}
-                  </li>
-                ))}
-            </ul>
-        </div>
-    )
-        
-}
+      <div className={styles.cardsContainer}>
+        {data.map((phone) => (
+          <CardComponent key={phone._id} phone={phone} />
+        ))}
+      </div>
+    );
+  }

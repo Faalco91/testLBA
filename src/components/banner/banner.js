@@ -20,13 +20,13 @@ export default function Banner() {
     <Box className={styles.navbar}>
       <AppBar sx={{ backgroundColor: 'white', color: 'black', boxShadow: 'none !important'}} position="static">
         <Toolbar>
-          <Image src={logo} width={40} className={styles.logo}/>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight:'500' }}>
+          <Image src={logo} alt='' width={45} className={styles.logo}/>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight:'500', fontSize: '1.5rem' }}>
             Front Market
           </Typography>
           <Stack direction="row" spacing={2}>
             <div className={styles.shoppingLogo}>
-                <Image src={shoppingCart} width={35} />
+                <Image src={shoppingCart} width={35} alt='' />
             </div>
             <Avatar alt="Batman" src={avatar} />
           </Stack>
