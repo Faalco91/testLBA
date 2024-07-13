@@ -23,8 +23,6 @@ const style = {
 };
 
 const createPhone = async (newPhone) => {
-  /*console.log('Creating phone:', newPhone);  // Log the new phone data before sending the request
-  console.log('Format json', JSON.stringify(newPhone));*/
   const res = await fetch('http://localhost:3000/api/phones', {
     method: 'POST',
     headers: {

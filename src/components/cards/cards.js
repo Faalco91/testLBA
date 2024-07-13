@@ -16,7 +16,7 @@ export default function Cards() {
           const result = await getData();
           setData(result);
         } catch (error) {
-          console.error('Error fetching data:', error);
+          console.error('Erreur dans la récupération des données :', error);
         }
       };
       fetchData();

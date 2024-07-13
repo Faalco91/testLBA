@@ -80,7 +80,7 @@ export default function CardComponent({ phone, onPhoneUpdate, onPhoneDelete }) {
       }
       window.location.reload()
     } catch (error) {
-      console.error('Failed to update phone', error);
+      console.error('La tentative de modification a échoué.', error);
     }
 
     handleClose();
@@ -94,7 +94,7 @@ export default function CardComponent({ phone, onPhoneUpdate, onPhoneDelete }) {
       window.location.reload()
 
     } catch (error) {
-      console.error('Failed to delete phone', error);
+      console.error('La tentative de suppression a échoué.', error);
     }
   };
 
