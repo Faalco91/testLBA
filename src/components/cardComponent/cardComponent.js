@@ -24,7 +24,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
 const updatePhone = async (id, updatedPhone) => {
   const res = await fetch(`http://localhost:3000/api/phones/${id}`, {
     method: 'PUT',
@@ -38,7 +37,6 @@ const updatePhone = async (id, updatedPhone) => {
   }
   return res.json();
 };
-
 const deletePhone = async (id) => {
   const res = await fetch(`http://localhost:3000/api/phones/${id}`, {
     method: 'DELETE',
@@ -49,30 +47,36 @@ const deletePhone = async (id) => {
   return res.json();
 };
 
-
-
 export default function CardComponent({ phone, onPhoneUpdate, onPhoneDelete }) {
   const [open, setOpen] = React.useState(false);
+  const [identif, setIdentif] = React.useState(phone._id);
   const [name, setName] = React.useState(phone.name);
   const [warrantyYears, setWarrantyYears] = React.useState(phone.warranty_years);
   const [rating, setRating] = React.useState(phone.rating);
   const [price, setPrice] = React.useState(phone.price);
+  const [available, setAvailable] = React.useState(phone.available);
+  const [type, setType] = React.useState(phone.type);
+
+
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleSave = async () => {
     const updatedPhone = {
+      _id: identif,
       name,
+      type,
       warranty_years: warrantyYears,
       rating,
       price,
+      available,
     };
 
     try {
-      await updatePhone(phone._id, updatedPhone);
+      await updatePhone(identif, updatedPhone);
       if (onPhoneUpdate) {
-        onPhoneUpdate(phone._id, updatedPhone);
+        onPhoneUpdate(identif, updatedPhone);
       }
       window.location.reload()
     } catch (error) {
@@ -81,12 +85,11 @@ export default function CardComponent({ phone, onPhoneUpdate, onPhoneDelete }) {
 
     handleClose();
   };
-
   const handleDelete = async () => {
     try {
-      await deletePhone(phone._id);
+      await deletePhone(identif);
       if (onPhoneDelete) {
-        onPhoneDelete(phone._id);
+        onPhoneDelete(identif);
       }
       window.location.reload()
 
@@ -112,10 +115,31 @@ export default function CardComponent({ phone, onPhoneUpdate, onPhoneDelete }) {
               Modifier les informations
             </Typography>
             <Box component="form" sx={{ mt: 4 }}>
+            <TextField
+                label="ID"
+                value={identif}
+                onChange={(e) => setIdentif(e.target.value)}
+                fullWidth
+                sx={{ mb: 3 }}
+              />  
+              <TextField
+                label="Disponibilité"
+                value={available}
+                onChange={(e) => setAvailable(e.target.value)}
+                fullWidth
+                sx={{ mb: 3 }}
+              />              
               <TextField
                 label="Nom"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                fullWidth
+                sx={{ mb: 3 }}
+              />
+              <TextField
+                label="Type"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
                 fullWidth
                 sx={{ mb: 3 }}
               />
@@ -167,9 +191,23 @@ export default function CardComponent({ phone, onPhoneUpdate, onPhoneDelete }) {
 
 
       <CardContent className={styles.cardContent}>
+      <Typography sx={{fontSize: '0.875rem', fontWeight: 300}} variant="body2">
+            ID : {phone._id}
+        </Typography>
+        <Typography variant="body2">
+            {' '}
+          {available ? (
+            <span className={styles.available}>Disponible</span>
+          ) : (
+            <span className={styles.notAvailable}>Non disponible</span>
+          )}
+        </Typography>
         <div>
           <Typography sx={{fontSize: '1rem', fontWeight:500}} variant="h5" component="div">
             {phone.name}
+          </Typography>
+          <Typography sx={{fontSize: '0.875rem', fontWeight: 300}} variant="body2">
+            {phone.type}
           </Typography>
           <Typography sx={{fontSize: '0.875rem', fontWeight: 300}} variant="body2">
             Garantie commerciale : {phone.warranty_years} ans

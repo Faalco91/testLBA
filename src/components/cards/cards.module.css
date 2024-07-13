@@ -4,3 +4,8 @@
     /* flex-wrap: wrap; */
     gap: 1rem;
 }
+.addPhoneButton {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4rem;
+}

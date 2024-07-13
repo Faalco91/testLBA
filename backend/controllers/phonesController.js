@@ -1,5 +1,6 @@
 import phones from "../models/phones.js";
 
+//Controller pour récupérer les données
 export const getPhone = async (req, res) => {
     try {
         const produits = await phones.find();
@@ -9,16 +10,19 @@ export const getPhone = async (req, res) => {
     }
 };
 
+//Controller pour Créer des données
 export const createPhone = async (req, res) => {
     const produit = new phones(req.body);
+    console.log('Data recues depuis le controller createPhone:', req.body);
     try {
         const savedphones = await produit.save();
-        res.status(201).json(savedphones);
+        res.json(savedphones);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 };
 
+//Controller pour modifier des données
 export const updatePhone = async (req, res) => {
     try {
         const updatedphones = await phones.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -28,10 +32,11 @@ export const updatePhone = async (req, res) => {
     }
 };
 
+//Controller pour supprimer des données
 export const deletePhone = async (req, res) => {
     try {
         await phones.findByIdAndDelete(req.params.id);
-        res.json({ message: 'phones supprimé' });
+        res.json({ message: 'phone supprimé' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
