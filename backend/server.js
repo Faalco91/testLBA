@@ -6,6 +6,8 @@ import dotenv from 'dotenv'
 import phonesRoutes from './routes/phonesRoutes.js';
 
 dotenv.config();
+
+//Je n'ai pas réussi à utiliser l'URI depuis le fichier.env à temps 
 const mongoUri = 'mongodb+srv://ouailamarir:tVZPJHkx2YminMGo@cluster0.wqwqh4b.mongodb.net/testLBA?retryWrites=true&w=majority&appName=Cluster0';
 
 const app = express();
